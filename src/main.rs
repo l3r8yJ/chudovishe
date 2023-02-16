@@ -1,7 +1,7 @@
 use crate::List::*;
 
 enum List {
-    Cons(u32, Box<List>),
+    Node(u32, Box<List>),
     Nil,
 }
 
@@ -11,19 +11,19 @@ impl List {
     }
 
     fn add(self, e: u32) -> List {
-        Cons(e, Box::new(self))
+        Node(e, Box::new(self))
     }
 
     fn len(&self) -> u32 {
         match *self {
-            Cons(_, ref tail) => 1 + tail.len(),
+            Node(_, ref tail) => 1 + tail.len(),
             Nil => 0
         }
     }
 
     fn stringify(&self) -> String {
         match *self {
-            Cons(head, ref tail) => {
+            Node(head, ref tail) => {
                 format!("{}. {}", head, tail.stringify())
             },
             Nil => {
